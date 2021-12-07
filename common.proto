@@ -1,0 +1,13 @@
+syntax = "proto3";
+package common;
+
+option go_package = "github.com/kitt-technology/protos-common/common";
+
+message Money {
+  // The three-letter currency code defined in ISO 4217.
+  string currency_code = 1;
+
+  // The whole units of the amount.
+  // For example if `currencyCode` is `"GBP"`, then 1 unit is one UK penny.
+  int64 units = 2;
+}
