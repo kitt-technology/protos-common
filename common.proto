@@ -11,3 +11,8 @@ message Money {
   // For example if `currencyCode` is `"GBP"`, then 1 unit is one UK penny.
   int64 units = 2;
 }
+
+message Coordinate {
+  double lat = 1;
+  double lng = 2;
+}
