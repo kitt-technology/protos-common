@@ -3,7 +3,6 @@ package common
 import (
 	gql "github.com/graphql-go/graphql"
 	"google.golang.org/grpc"
-	pg "github.com/kitt-technology/protoc-gen-graphql/graphql"
 )
 
 var fieldInits []func(...grpc.DialOption)
@@ -209,70 +208,5 @@ func (msg *Int32Range) XXX_GraphqlArgs() gql.FieldConfigArgument {
 }
 
 func (msg *Int32Range) XXX_Package() string {
-	return "common"
-}
-
-var TimestampRangeGraphqlType = gql.NewObject(gql.ObjectConfig{
-	Name: "TimestampRange",
-	Fields: gql.Fields{
-		"min": &gql.Field{
-			Type: pg.TimestampGraphqlType,
-		},
-		"max": &gql.Field{
-			Type: pg.TimestampGraphqlType,
-		},
-	},
-})
-
-var TimestampRangeGraphqlInputType = gql.NewInputObject(gql.InputObjectConfig{
-	Name: "TimestampRangeInput",
-	Fields: gql.InputObjectConfigFieldMap{
-		"min": &gql.InputObjectFieldConfig{
-			Type: pg.TimestampGraphqlInputType,
-		},
-		"max": &gql.InputObjectFieldConfig{
-			Type: pg.TimestampGraphqlInputType,
-		},
-	},
-})
-
-var TimestampRangeGraphqlArgs = gql.FieldConfigArgument{
-	"min": &gql.ArgumentConfig{
-		Type: pg.TimestampGraphqlInputType,
-	},
-	"max": &gql.ArgumentConfig{
-		Type: pg.TimestampGraphqlInputType,
-	},
-}
-
-func TimestampRangeFromArgs(args map[string]interface{}) *TimestampRange {
-	return TimestampRangeInstanceFromArgs(&TimestampRange{}, args)
-}
-
-func TimestampRangeInstanceFromArgs(objectFromArgs *TimestampRange, args map[string]interface{}) *TimestampRange {
-	if args["min"] != nil {
-		val := args["min"]
-		objectFromArgs.Min = pg.ToTimestamp(val)
-	}
-	if args["max"] != nil {
-		val := args["max"]
-		objectFromArgs.Max = pg.ToTimestamp(val)
-	}
-	return objectFromArgs
-}
-
-func (objectFromArgs *TimestampRange) FromArgs(args map[string]interface{}) {
-	TimestampRangeInstanceFromArgs(objectFromArgs, args)
-}
-
-func (msg *TimestampRange) XXX_GraphqlType() *gql.Object {
-	return TimestampRangeGraphqlType
-}
-
-func (msg *TimestampRange) XXX_GraphqlArgs() gql.FieldConfigArgument {
-	return TimestampRangeGraphqlArgs
-}
-
-func (msg *TimestampRange) XXX_Package() string {
 	return "common"
 }

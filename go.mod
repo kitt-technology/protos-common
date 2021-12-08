@@ -10,7 +10,6 @@ require (
 
 require (
 	github.com/golang/protobuf v1.5.0 // indirect
-	github.com/kitt-technology/protoc-gen-graphql v0.32.0 // indirect
 	golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
 	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
 	golang.org/x/text v0.3.5 // indirect
