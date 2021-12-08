@@ -3,6 +3,7 @@ package common
 import (
 	gql "github.com/graphql-go/graphql"
 	"google.golang.org/grpc"
+	pg "github.com/kitt-technology/protoc-gen-graphql/graphql"
 )
 
 var fieldInits []func(...grpc.DialOption)
@@ -143,5 +144,135 @@ func (msg *Coordinate) XXX_GraphqlArgs() gql.FieldConfigArgument {
 }
 
 func (msg *Coordinate) XXX_Package() string {
+	return "common"
+}
+
+var Int32RangeGraphqlType = gql.NewObject(gql.ObjectConfig{
+	Name: "Int32Range",
+	Fields: gql.Fields{
+		"min": &gql.Field{
+			Type: gql.NewNonNull(gql.Int),
+		},
+		"max": &gql.Field{
+			Type: gql.NewNonNull(gql.Int),
+		},
+	},
+})
+
+var Int32RangeGraphqlInputType = gql.NewInputObject(gql.InputObjectConfig{
+	Name: "Int32RangeInput",
+	Fields: gql.InputObjectConfigFieldMap{
+		"min": &gql.InputObjectFieldConfig{
+			Type: gql.NewNonNull(gql.Int),
+		},
+		"max": &gql.InputObjectFieldConfig{
+			Type: gql.NewNonNull(gql.Int),
+		},
+	},
+})
+
+var Int32RangeGraphqlArgs = gql.FieldConfigArgument{
+	"min": &gql.ArgumentConfig{
+		Type: gql.NewNonNull(gql.Int),
+	},
+	"max": &gql.ArgumentConfig{
+		Type: gql.NewNonNull(gql.Int),
+	},
+}
+
+func Int32RangeFromArgs(args map[string]interface{}) *Int32Range {
+	return Int32RangeInstanceFromArgs(&Int32Range{}, args)
+}
+
+func Int32RangeInstanceFromArgs(objectFromArgs *Int32Range, args map[string]interface{}) *Int32Range {
+	if args["min"] != nil {
+		val := args["min"]
+		objectFromArgs.Min = int32(val.(int))
+	}
+	if args["max"] != nil {
+		val := args["max"]
+		objectFromArgs.Max = int32(val.(int))
+	}
+	return objectFromArgs
+}
+
+func (objectFromArgs *Int32Range) FromArgs(args map[string]interface{}) {
+	Int32RangeInstanceFromArgs(objectFromArgs, args)
+}
+
+func (msg *Int32Range) XXX_GraphqlType() *gql.Object {
+	return Int32RangeGraphqlType
+}
+
+func (msg *Int32Range) XXX_GraphqlArgs() gql.FieldConfigArgument {
+	return Int32RangeGraphqlArgs
+}
+
+func (msg *Int32Range) XXX_Package() string {
+	return "common"
+}
+
+var TimestampRangeGraphqlType = gql.NewObject(gql.ObjectConfig{
+	Name: "TimestampRange",
+	Fields: gql.Fields{
+		"min": &gql.Field{
+			Type: pg.TimestampGraphqlType,
+		},
+		"max": &gql.Field{
+			Type: pg.TimestampGraphqlType,
+		},
+	},
+})
+
+var TimestampRangeGraphqlInputType = gql.NewInputObject(gql.InputObjectConfig{
+	Name: "TimestampRangeInput",
+	Fields: gql.InputObjectConfigFieldMap{
+		"min": &gql.InputObjectFieldConfig{
+			Type: pg.TimestampGraphqlInputType,
+		},
+		"max": &gql.InputObjectFieldConfig{
+			Type: pg.TimestampGraphqlInputType,
+		},
+	},
+})
+
+var TimestampRangeGraphqlArgs = gql.FieldConfigArgument{
+	"min": &gql.ArgumentConfig{
+		Type: pg.TimestampGraphqlInputType,
+	},
+	"max": &gql.ArgumentConfig{
+		Type: pg.TimestampGraphqlInputType,
+	},
+}
+
+func TimestampRangeFromArgs(args map[string]interface{}) *TimestampRange {
+	return TimestampRangeInstanceFromArgs(&TimestampRange{}, args)
+}
+
+func TimestampRangeInstanceFromArgs(objectFromArgs *TimestampRange, args map[string]interface{}) *TimestampRange {
+	if args["min"] != nil {
+		val := args["min"]
+		objectFromArgs.Min = pg.ToTimestamp(val)
+	}
+	if args["max"] != nil {
+		val := args["max"]
+		objectFromArgs.Max = pg.ToTimestamp(val)
+	}
+	return objectFromArgs
+}
+
+func (objectFromArgs *TimestampRange) FromArgs(args map[string]interface{}) {
+	TimestampRangeInstanceFromArgs(objectFromArgs, args)
+}
+
+func (msg *TimestampRange) XXX_GraphqlType() *gql.Object {
+	return TimestampRangeGraphqlType
+}
+
+func (msg *TimestampRange) XXX_GraphqlArgs() gql.FieldConfigArgument {
+	return TimestampRangeGraphqlArgs
+}
+
+func (msg *TimestampRange) XXX_Package() string {
 	return "common"
 }

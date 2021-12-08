@@ -3,6 +3,8 @@ package common;
 
 option go_package = "github.com/kitt-technology/protos-common/common";
 
+import "google/protobuf/timestamp.proto";
+
 message Money {
   // The three-letter currency code defined in ISO 4217.
   string currency_code = 1;
@@ -15,4 +17,14 @@ message Money {
 message Coordinate {
   double lat = 1;
   double lng = 2;
+}
+
+message Int32Range {
+  int32 min = 1;
+  int32 max = 2;
+}
+
+message TimestampRange {
+  google.protobuf.Timestamp min = 1;
+  google.protobuf.Timestamp max = 2;
 }
