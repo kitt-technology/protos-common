@@ -14,6 +14,7 @@ generate:
 	protoc \
 		--proto_path . \
 		-I=. \
+		-I ${GOPATH}/src \
 		--go_out="module=${PACKAGE}:./" \
 		--graphql_out="module=${PACKAGE}:./" \
 		common.proto

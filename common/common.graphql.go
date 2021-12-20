@@ -16,71 +16,6 @@ func Fields(opts ...grpc.DialOption) []*gql.Field {
 
 var fields []*gql.Field
 
-var MoneyGraphqlType = gql.NewObject(gql.ObjectConfig{
-	Name: "Money",
-	Fields: gql.Fields{
-		"currencyCode": &gql.Field{
-			Type: gql.NewNonNull(gql.String),
-		},
-		"units": &gql.Field{
-			Type: gql.NewNonNull(gql.Int),
-		},
-	},
-})
-
-var MoneyGraphqlInputType = gql.NewInputObject(gql.InputObjectConfig{
-	Name: "MoneyInput",
-	Fields: gql.InputObjectConfigFieldMap{
-		"currencyCode": &gql.InputObjectFieldConfig{
-			Type: gql.NewNonNull(gql.String),
-		},
-		"units": &gql.InputObjectFieldConfig{
-			Type: gql.NewNonNull(gql.Int),
-		},
-	},
-})
-
-var MoneyGraphqlArgs = gql.FieldConfigArgument{
-	"currencyCode": &gql.ArgumentConfig{
-		Type: gql.NewNonNull(gql.String),
-	},
-	"units": &gql.ArgumentConfig{
-		Type: gql.NewNonNull(gql.Int),
-	},
-}
-
-func MoneyFromArgs(args map[string]interface{}) *Money {
-	return MoneyInstanceFromArgs(&Money{}, args)
-}
-
-func MoneyInstanceFromArgs(objectFromArgs *Money, args map[string]interface{}) *Money {
-	if args["currencyCode"] != nil {
-		val := args["currencyCode"]
-		objectFromArgs.CurrencyCode = string(val.(string))
-	}
-	if args["units"] != nil {
-		val := args["units"]
-		objectFromArgs.Units = int64(val.(int))
-	}
-	return objectFromArgs
-}
-
-func (objectFromArgs *Money) FromArgs(args map[string]interface{}) {
-	MoneyInstanceFromArgs(objectFromArgs, args)
-}
-
-func (msg *Money) XXX_GraphqlType() *gql.Object {
-	return MoneyGraphqlType
-}
-
-func (msg *Money) XXX_GraphqlArgs() gql.FieldConfigArgument {
-	return MoneyGraphqlArgs
-}
-
-func (msg *Money) XXX_Package() string {
-	return "common"
-}
-
 var CoordinateGraphqlType = gql.NewObject(gql.ObjectConfig{
 	Name: "Coordinate",
 	Fields: gql.Fields{
@@ -208,5 +143,83 @@ func (msg *Int32Range) XXX_GraphqlArgs() gql.FieldConfigArgument {
 }
 
 func (msg *Int32Range) XXX_Package() string {
+	return "common"
+}
+
+var DateGraphqlType = gql.NewObject(gql.ObjectConfig{
+	Name: "Date",
+	Fields: gql.Fields{
+		"year": &gql.Field{
+			Type: gql.NewNonNull(gql.Int),
+		},
+		"month": &gql.Field{
+			Type: gql.NewNonNull(gql.Int),
+		},
+		"date": &gql.Field{
+			Type: gql.NewNonNull(gql.Int),
+		},
+	},
+})
+
+var DateGraphqlInputType = gql.NewInputObject(gql.InputObjectConfig{
+	Name: "DateInput",
+	Fields: gql.InputObjectConfigFieldMap{
+		"year": &gql.InputObjectFieldConfig{
+			Type: gql.NewNonNull(gql.Int),
+		},
+		"month": &gql.InputObjectFieldConfig{
+			Type: gql.NewNonNull(gql.Int),
+		},
+		"date": &gql.InputObjectFieldConfig{
+			Type: gql.NewNonNull(gql.Int),
+		},
+	},
+})
+
+var DateGraphqlArgs = gql.FieldConfigArgument{
+	"year": &gql.ArgumentConfig{
+		Type: gql.NewNonNull(gql.Int),
+	},
+	"month": &gql.ArgumentConfig{
+		Type: gql.NewNonNull(gql.Int),
+	},
+	"date": &gql.ArgumentConfig{
+		Type: gql.NewNonNull(gql.Int),
+	},
+}
+
+func DateFromArgs(args map[string]interface{}) *Date {
+	return DateInstanceFromArgs(&Date{}, args)
+}
+
+func DateInstanceFromArgs(objectFromArgs *Date, args map[string]interface{}) *Date {
+	if args["year"] != nil {
+		val := args["year"]
+		objectFromArgs.Year = int32(val.(int))
+	}
+	if args["month"] != nil {
+		val := args["month"]
+		objectFromArgs.Month = int32(val.(int))
+	}
+	if args["date"] != nil {
+		val := args["date"]
+		objectFromArgs.Date = int32(val.(int))
+	}
+	return objectFromArgs
+}
+
+func (objectFromArgs *Date) FromArgs(args map[string]interface{}) {
+	DateInstanceFromArgs(objectFromArgs, args)
+}
+
+func (msg *Date) XXX_GraphqlType() *gql.Object {
+	return DateGraphqlType
+}
+
+func (msg *Date) XXX_GraphqlArgs() gql.FieldConfigArgument {
+	return DateGraphqlArgs
+}
+
+func (msg *Date) XXX_Package() string {
 	return "common"
 }
