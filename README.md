@@ -21,19 +21,23 @@ The Kitt common proto library
 4. Commit, merge, and pull
 5. Tag the new version: `git tag v0.X.X`
 6. Push the tag: `git push --tags`
-7. Rebuild the kitt dependancy docker image (`KITT_REPO/build/common/docker/deps/Dockerfile`):
+7. Update `KITT_REPO/build/common/docker/deps/Dockerfile`:
+   ```
+   ENV PROTOS_COMMON_VERSION v0.X.X
+   ```
+8. Rebuild the docker image:
    ```
    docker build --build-arg GITHUB_TOKEN -t gcr.io/kitt-220208/deps .
    ```
-8. Push that docker image:
+9. Push that docker image:
    ```
    docker push gcr.io/kitt-220208/deps
    ```
-9. Import the common package in a proto:
+10. Import the common package in a proto:
    ```
    import "github.com/kitt-technology/protos-common/common.proto";
    ```
-10. Use the common object:
+11. Use the common object:
    ```protobuf
    common.Money price = 1;
    ```
