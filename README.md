@@ -37,3 +37,8 @@ The Kitt common proto library
    ```protobuf
    common.Money price = 1;
    ```
+
+
+## Useful Resources
+Google's proto library:
+https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto
