@@ -23,11 +23,8 @@ The Kitt common proto library
 6. Push the tag: `git push --tags`
 7. Rebuild the kitt dependancy docker image (`KITT_REPO/build/common/docker/deps/Dockerfile`):
    ```
-   docker build --build-arg GITHUB_TOKEN --build-arg GEN_GRAPHQL_VERSION=v0.X.X --build-arg GEN_KITT_VERSION=v0.X.X --build-arg PROTOS_COMMON_VERSION=v0.X.X -t gcr.io/kitt-220208/deps .
+   docker build --build-arg GITHUB_TOKEN -t gcr.io/kitt-220208/deps .
    ```
-   You'll need to get the latest versions from:
-      https://github.com/kitt-technology/protoc-gen-graphql/releases <br/>
-      https://github.com/kitt-technology/protoc-gen-kitt/releases
 8. Push that docker image:
    ```
    docker push gcr.io/kitt-220208/deps
