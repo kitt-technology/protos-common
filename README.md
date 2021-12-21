@@ -1,4 +1,4 @@
-# Protos-common
+ff# Protos-common
 
 The Kitt common proto library
 
@@ -21,13 +21,16 @@ The Kitt common proto library
 4. Commit, merge, and pull
 5. Tag the new version: `git tag v0.X.X`
 6. Push the tag: `git push --tags`
-7. Update the version in the deps docker image (`KITT_REPO/build/common/docker/deps/Dockerfile`):
+7. Rebuild the kitt dependancy docker image (`KITT_REPO/build/common/docker/deps/Dockerfile`):
    ```
-   RUN git clone --depth 1 --branch v0.X.X https://github.com/kitt-technology/protos-common.git /protos/github.com/kitt-technology/protos-common
+   docker build --build-arg GITHUB_TOKEN --build-arg GEN_GRAPHQL_VERSION=v0.X.X --build-arg GEN_KITT_VERSION=v0.X.X --build-arg PROTOS_COMMON_VERSION=v0.X.X -t gcr.io/kitt-220208/deps .
    ```
-8. Rebuild that docker image:
+   You'll need to get the latest versions from:
+      https://github.com/kitt-technology/protoc-gen-graphql/releases <br/>
+      https://github.com/kitt-technology/protoc-gen-kitt/releases
+8. Push that docker image:
    ```
-   docker build --build-arg GITHUB_TOKEN -t gcr.io/kitt-220208/deps .
+   docker push gcr.io/kitt-220208/deps
    ```
 9. Import the common package in a proto:
    ```
