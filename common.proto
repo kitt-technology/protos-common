@@ -18,7 +18,10 @@ message Money {
 }
 
 message Coordinate {
+  // The latitude in degrees. It must be in the range [-90.0, +90.0].
   double lat = 1;
+
+  // The longitude in degrees. It must be in the range [-180.0, +180.0].
   double lng = 2;
 }
 
@@ -26,9 +29,29 @@ message Int32Range {
   int32 min = 1;
   int32 max = 2;
 }
+message StringRange {
+  string min = 1;
+  string max = 2;
+}
 
 message Date {
+  // Year of the date. Must be from 1 to 9999, or 0 to specify a date without
+  // a year.
   int32 year = 1;
+
+  // Month of a year. Must be from 1 to 12, or 0 to specify a year without a
+  // month and day.
   int32 month = 2;
-  int32 date = 3;
+
+  // Day of a month. Must be from 1 to 31 and valid for the year and month, or 0
+  // to specify a year by itself or a year and month where the day isn't
+  // significant.
+  int32 day = 3;
+}
+
+message Address {
+  string street_address = 1;
+  string town = 2;
+  string country = 3;
+  string postal_code = 4;
 }
