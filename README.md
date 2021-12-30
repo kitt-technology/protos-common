@@ -1,4 +1,4 @@
-ff# Protos-common
+# Protos-common
 
 The Kitt common proto library
 
