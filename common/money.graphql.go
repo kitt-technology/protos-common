@@ -2,7 +2,6 @@ package common
 
 import (
 	"errors"
-	"github.com/Rhymond/go-money"
 	gql "github.com/graphql-go/graphql"
 	"golang.org/x/text/currency"
 )
@@ -17,7 +16,7 @@ import (
 func MoneyFromArgs(field map[string]interface{}) *Money {
 	mon := Money{
 		CurrencyCode: field["currencyCode"].(string),
-		Units:        field["units"].(int64),
+		Units:        int64(field["units"].(int)),
 	}
 	return &mon
 }
