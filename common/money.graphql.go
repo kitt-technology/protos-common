@@ -17,7 +17,7 @@ import (
 func MoneyFromArgs(field map[string]interface{}) *Money {
 	mon := Money{
 		CurrencyCode: field["currencyCode"].(string),
-		Units:        field["currencyCode"].(int64),
+		Units:        field["units"].(int64),
 	}
 	return &mon
 }
