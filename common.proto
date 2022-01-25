@@ -33,6 +33,10 @@ message StringRange {
   string min = 1;
   string max = 2;
 }
+message MoneyRange {
+  Money min = 1;
+  Money max = 2;
+}
 
 message Date {
   // Year of the date. Must be from 1 to 9999, or 0 to specify a date without

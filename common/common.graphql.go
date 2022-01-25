@@ -3,6 +3,7 @@ package common
 import (
 	gql "github.com/graphql-go/graphql"
 	"google.golang.org/grpc"
+	"github.com/kitt-technology/protos-common/common"
 )
 
 var fieldInits []func(...grpc.DialOption)
@@ -208,6 +209,71 @@ func (msg *StringRange) XXX_GraphqlArgs() gql.FieldConfigArgument {
 }
 
 func (msg *StringRange) XXX_Package() string {
+	return "common"
+}
+
+var MoneyRangeGraphqlType = gql.NewObject(gql.ObjectConfig{
+	Name: "MoneyRange",
+	Fields: gql.Fields{
+		"min": &gql.Field{
+			Type: common.MoneyGraphqlType,
+		},
+		"max": &gql.Field{
+			Type: common.MoneyGraphqlType,
+		},
+	},
+})
+
+var MoneyRangeGraphqlInputType = gql.NewInputObject(gql.InputObjectConfig{
+	Name: "MoneyRangeInput",
+	Fields: gql.InputObjectConfigFieldMap{
+		"min": &gql.InputObjectFieldConfig{
+			Type: common.MoneyGraphqlInputType,
+		},
+		"max": &gql.InputObjectFieldConfig{
+			Type: common.MoneyGraphqlInputType,
+		},
+	},
+})
+
+var MoneyRangeGraphqlArgs = gql.FieldConfigArgument{
+	"min": &gql.ArgumentConfig{
+		Type: common.MoneyGraphqlInputType,
+	},
+	"max": &gql.ArgumentConfig{
+		Type: common.MoneyGraphqlInputType,
+	},
+}
+
+func MoneyRangeFromArgs(args map[string]interface{}) *MoneyRange {
+	return MoneyRangeInstanceFromArgs(&MoneyRange{}, args)
+}
+
+func MoneyRangeInstanceFromArgs(objectFromArgs *MoneyRange, args map[string]interface{}) *MoneyRange {
+	if args["min"] != nil {
+		val := args["min"]
+		objectFromArgs.Min = common.MoneyFromArgs(val.(map[string]interface{}))
+	}
+	if args["max"] != nil {
+		val := args["max"]
+		objectFromArgs.Max = common.MoneyFromArgs(val.(map[string]interface{}))
+	}
+	return objectFromArgs
+}
+
+func (objectFromArgs *MoneyRange) FromArgs(args map[string]interface{}) {
+	MoneyRangeInstanceFromArgs(objectFromArgs, args)
+}
+
+func (msg *MoneyRange) XXX_GraphqlType() *gql.Object {
+	return MoneyRangeGraphqlType
+}
+
+func (msg *MoneyRange) XXX_GraphqlArgs() gql.FieldConfigArgument {
+	return MoneyRangeGraphqlArgs
+}
+
+func (msg *MoneyRange) XXX_Package() string {
 	return "common"
 }
 
