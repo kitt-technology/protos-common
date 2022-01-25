@@ -3,7 +3,6 @@ package common
 import (
 	gql "github.com/graphql-go/graphql"
 	"google.golang.org/grpc"
-	"github.com/kitt-technology/protos-common/common"
 )
 
 var fieldInits []func(...grpc.DialOption)
@@ -216,10 +215,10 @@ var MoneyRangeGraphqlType = gql.NewObject(gql.ObjectConfig{
 	Name: "MoneyRange",
 	Fields: gql.Fields{
 		"min": &gql.Field{
-			Type: common.MoneyGraphqlType,
+			Type: MoneyGraphqlType,
 		},
 		"max": &gql.Field{
-			Type: common.MoneyGraphqlType,
+			Type: MoneyGraphqlType,
 		},
 	},
 })
@@ -228,20 +227,20 @@ var MoneyRangeGraphqlInputType = gql.NewInputObject(gql.InputObjectConfig{
 	Name: "MoneyRangeInput",
 	Fields: gql.InputObjectConfigFieldMap{
 		"min": &gql.InputObjectFieldConfig{
-			Type: common.MoneyGraphqlInputType,
+			Type: MoneyGraphqlInputType,
 		},
 		"max": &gql.InputObjectFieldConfig{
-			Type: common.MoneyGraphqlInputType,
+			Type: MoneyGraphqlInputType,
 		},
 	},
 })
 
 var MoneyRangeGraphqlArgs = gql.FieldConfigArgument{
 	"min": &gql.ArgumentConfig{
-		Type: common.MoneyGraphqlInputType,
+		Type: MoneyGraphqlInputType,
 	},
 	"max": &gql.ArgumentConfig{
-		Type: common.MoneyGraphqlInputType,
+		Type: MoneyGraphqlInputType,
 	},
 }
 
@@ -252,11 +251,11 @@ func MoneyRangeFromArgs(args map[string]interface{}) *MoneyRange {
 func MoneyRangeInstanceFromArgs(objectFromArgs *MoneyRange, args map[string]interface{}) *MoneyRange {
 	if args["min"] != nil {
 		val := args["min"]
-		objectFromArgs.Min = common.MoneyFromArgs(val.(map[string]interface{}))
+		objectFromArgs.Min = MoneyFromArgs(val.(map[string]interface{}))
 	}
 	if args["max"] != nil {
 		val := args["max"]
-		objectFromArgs.Max = common.MoneyFromArgs(val.(map[string]interface{}))
+		objectFromArgs.Max = MoneyFromArgs(val.(map[string]interface{}))
 	}
 	return objectFromArgs
 }
