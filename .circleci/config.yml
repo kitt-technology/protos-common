@@ -8,7 +8,8 @@ jobs:
   test:
     working_directory: /go/src/github.com/kitt-technology/protos-common
     docker:
-      - image: kittoffices/protos-common
+      - image: kittoffices/protoc-gen-graphql
+
     steps:
       - checkout
       - run: go get ./... | go test ./common
