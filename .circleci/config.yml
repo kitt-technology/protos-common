@@ -1,0 +1,14 @@
+version: 2
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - test: {}
+jobs:
+  test:
+    working_directory: /go/src/github.com/kitt-technology/protos-common
+    docker:
+      - image: kittoffices/protos-common
+    steps:
+      - checkout
+      - run: go get ./... | go test ./common
