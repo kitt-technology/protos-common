@@ -12,4 +12,4 @@ jobs:
 
     steps:
       - checkout
-      - run: go get ./... | go test ./common
+      - run: go get ./... | go install . | go test ./common
