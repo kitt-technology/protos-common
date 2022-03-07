@@ -146,6 +146,71 @@ func (msg *Int32Range) XXX_Package() string {
 	return "common"
 }
 
+var Int32OptionalRangeGraphqlType = gql.NewObject(gql.ObjectConfig{
+	Name: "Int32OptionalRange",
+	Fields: gql.Fields{
+		"min": &gql.Field{
+			Type: gql.Int,
+		},
+		"max": &gql.Field{
+			Type: gql.Int,
+		},
+	},
+})
+
+var Int32OptionalRangeGraphqlInputType = gql.NewInputObject(gql.InputObjectConfig{
+	Name: "Int32OptionalRangeInput",
+	Fields: gql.InputObjectConfigFieldMap{
+		"min": &gql.InputObjectFieldConfig{
+			Type: gql.Int,
+		},
+		"max": &gql.InputObjectFieldConfig{
+			Type: gql.Int,
+		},
+	},
+})
+
+var Int32OptionalRangeGraphqlArgs = gql.FieldConfigArgument{
+	"min": &gql.ArgumentConfig{
+		Type: gql.Int,
+	},
+	"max": &gql.ArgumentConfig{
+		Type: gql.Int,
+	},
+}
+
+func Int32OptionalRangeFromArgs(args map[string]interface{}) *Int32OptionalRange {
+	return Int32OptionalRangeInstanceFromArgs(&Int32OptionalRange{}, args)
+}
+
+func Int32OptionalRangeInstanceFromArgs(objectFromArgs *Int32OptionalRange, args map[string]interface{}) *Int32OptionalRange {
+	if args["min"] != nil {
+		val := args["min"]
+		objectFromArgs.Min = int32(val.(int))
+	}
+	if args["max"] != nil {
+		val := args["max"]
+		objectFromArgs.Max = int32(val.(int))
+	}
+	return objectFromArgs
+}
+
+func (objectFromArgs *Int32OptionalRange) FromArgs(args map[string]interface{}) {
+	Int32OptionalRangeInstanceFromArgs(objectFromArgs, args)
+}
+
+func (msg *Int32OptionalRange) XXX_GraphqlType() *gql.Object {
+	return Int32OptionalRangeGraphqlType
+}
+
+func (msg *Int32OptionalRange) XXX_GraphqlArgs() gql.FieldConfigArgument {
+	return Int32OptionalRangeGraphqlArgs
+}
+
+func (msg *Int32OptionalRange) XXX_Package() string {
+	return "common"
+}
+
 var StringRangeGraphqlType = gql.NewObject(gql.ObjectConfig{
 	Name: "StringRange",
 	Fields: gql.Fields{
