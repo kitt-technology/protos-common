@@ -29,6 +29,12 @@ message Int32Range {
   int32 min = 1;
   int32 max = 2;
 }
+
+message Int32OptionalRange {
+  int32 min = 1 [(graphql.optional) = true];
+  int32 max = 2 [(graphql.optional) = true];
+}
+
 message StringRange {
   string min = 1;
   string max = 2;
