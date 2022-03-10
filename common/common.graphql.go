@@ -3,6 +3,7 @@ package common
 import (
 	gql "github.com/graphql-go/graphql"
 	"google.golang.org/grpc"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 var fieldInits []func(...grpc.DialOption)
@@ -151,9 +152,21 @@ var Int32OptionalRangeGraphqlType = gql.NewObject(gql.ObjectConfig{
 	Fields: gql.Fields{
 		"min": &gql.Field{
 			Type: gql.Int,
+			Resolve: func(p gql.ResolveParams) (interface{}, error) {
+				if p.Source.(*Int32OptionalRange) == nil || p.Source.(*Int32OptionalRange).Min == nil {
+					return nil, nil
+				}
+				return p.Source.(*Int32OptionalRange).Min.Value, nil
+			},
 		},
 		"max": &gql.Field{
 			Type: gql.Int,
+			Resolve: func(p gql.ResolveParams) (interface{}, error) {
+				if p.Source.(*Int32OptionalRange) == nil || p.Source.(*Int32OptionalRange).Max == nil {
+					return nil, nil
+				}
+				return p.Source.(*Int32OptionalRange).Max.Value, nil
+			},
 		},
 	},
 })
@@ -186,11 +199,11 @@ func Int32OptionalRangeFromArgs(args map[string]interface{}) *Int32OptionalRange
 func Int32OptionalRangeInstanceFromArgs(objectFromArgs *Int32OptionalRange, args map[string]interface{}) *Int32OptionalRange {
 	if args["min"] != nil {
 		val := args["min"]
-		objectFromArgs.Min = int32(val.(int))
+		objectFromArgs.Min = wrapperspb.Int32(int32(val.(int)))
 	}
 	if args["max"] != nil {
 		val := args["max"]
-		objectFromArgs.Max = int32(val.(int))
+		objectFromArgs.Max = wrapperspb.Int32(int32(val.(int)))
 	}
 	return objectFromArgs
 }
