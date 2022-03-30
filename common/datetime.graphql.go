@@ -134,7 +134,7 @@ var DateTimeGraphqlType = gql.NewObject(gql.ObjectConfig{
 	},
 })
 
-func DateTimeFromArgs(objectFromArgs *DateTime, args map[string]interface{}) *DateTime {
+func DateTimeFromArgs(args map[string]interface{}) *DateTime {
 	if args["dateTime"] != nil {
 		obj, err := parseObject(args["dateTime"].(map[string]interface{}))
 		if err != nil {

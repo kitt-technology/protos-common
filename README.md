@@ -29,7 +29,7 @@ The Kitt common proto library
    ```
    docker build --build-arg GITHUB_TOKEN -t gcr.io/kitt-220208/deps .
    ```
-9. Push that docker image:
+9. Push that docker image (optional):
    ```
    docker push gcr.io/kitt-220208/deps
    ```

@@ -63,7 +63,7 @@ func Test_DateTimeFromArgs(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := DateTimeFromArgs(&DateTime{}, tt.args.args)
+			got := DateTimeFromArgs(tt.args.args)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("DateTimeFromArgs() = %v, want %v", got, tt.want)
 			}
