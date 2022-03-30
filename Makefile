@@ -5,9 +5,8 @@ all: test
 
 .PHONY: deps
 deps:
-	go get google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
 	GO111MODULE=off go get github.com/kitt-technology/protoc-gen-graphql
-	@go mod download
+	@go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
 
 .PHONY: generate
 generate:
