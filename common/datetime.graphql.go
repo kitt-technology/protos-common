@@ -156,18 +156,7 @@ func parseIsoString(isoString string) (*DateTime, error) {
 	if err != nil {
 		return nil, err
 	}
-	_, offset := time.Zone()
-	return &DateTime{
-		Year:             int32(time.Year()),
-		Month:            int32(time.Month()),
-		Day:              int32(time.Day()),
-		Hours:            int32(time.Hour()),
-		Minutes:          int32(time.Minute()),
-		Seconds:          int32(time.Second()),
-		Nanos:            int32(time.Nanosecond()),
-		UtcOffsetSeconds: int64(offset),
-		TimeZone:         time.Location().String(),
-	}, nil
+	return DateTimeFromTime(time), nil
 }
 
 func parseObject(args map[string]interface{}) (*DateTime, error) {
@@ -211,7 +200,7 @@ func parseObject(args map[string]interface{}) (*DateTime, error) {
 	return objectFromArgs, nil
 }
 
-func dateTimeToTime(t DateTime) time.Time {
+func DateTimeToTime(t DateTime) time.Time {
 	loc := time.UTC
 	if t.TimeZone != "" {
 		loc_, err := time.LoadLocation(t.TimeZone)
@@ -222,4 +211,19 @@ func dateTimeToTime(t DateTime) time.Time {
 		loc = time.FixedZone("Fixed", int(t.UtcOffsetSeconds))
 	}
 	return time.Date(int(t.Year), time.Month(t.Month), int(t.Day), int(t.Hours), int(t.Minutes), int(t.Seconds), int(t.Nanos), loc)
+}
+
+func DateTimeFromTime(t time.Time) *DateTime {
+	_, offset := t.Zone()
+	return &DateTime{
+		Year:             int32(t.Year()),
+		Month:            int32(t.Month()),
+		Day:              int32(t.Day()),
+		Hours:            int32(t.Hour()),
+		Minutes:          int32(t.Minute()),
+		Seconds:          int32(t.Second()),
+		Nanos:            int32(t.Nanosecond()),
+		UtcOffsetSeconds: int64(offset),
+		TimeZone:         t.Location().String(),
+	}
 }
