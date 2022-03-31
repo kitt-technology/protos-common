@@ -89,7 +89,7 @@ var DateTimeGraphqlType = gql.NewObject(gql.ObjectConfig{
 			Type: gql.String,
 			Resolve: func(p gql.ResolveParams) (interface{}, error) {
 				if t, ok := p.Source.(*DateTime); ok && t != nil {
-					dateTime := dateTimeToTime(*t)
+					dateTime := DateTimeToTime(*t)
 					if dateTime.IsZero() {
 						return nil, errors.New("cannot convert zero dateTime to iso string")
 					}
@@ -102,7 +102,7 @@ var DateTimeGraphqlType = gql.NewObject(gql.ObjectConfig{
 			Type: gql.Int,
 			Resolve: func(p gql.ResolveParams) (interface{}, error) {
 				if t, ok := p.Source.(*DateTime); ok && t != nil {
-					dateTime := dateTimeToTime(*t)
+					dateTime := DateTimeToTime(*t)
 					if dateTime.IsZero() {
 						return nil, errors.New("cannot convert zero dateTime to unix")
 					}
@@ -122,7 +122,7 @@ var DateTimeGraphqlType = gql.NewObject(gql.ObjectConfig{
 			Type: gql.String,
 			Resolve: func(p gql.ResolveParams) (interface{}, error) {
 				if t, ok := p.Source.(*DateTime); ok && t != nil {
-					dateTime := dateTimeToTime(*t)
+					dateTime := DateTimeToTime(*t)
 					if dateTime.IsZero() {
 						return nil, errors.New("cannot convert zero dateTime to formatable string")
 					}
