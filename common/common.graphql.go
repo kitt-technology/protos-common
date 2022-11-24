@@ -70,6 +70,17 @@ func (objectFromArgs *Coordinate) FromArgs(args map[string]interface{}) {
 	CoordinateInstanceFromArgs(objectFromArgs, args)
 }
 
+func (x *Coordinate) Raw() interface{} {
+	return x
+}
+
+func (x *Coordinate) Validate() error {
+	if x == nil {
+		return
+	}
+	return x
+}
+
 func (msg *Coordinate) XXX_GraphqlType() *gql.Object {
 	return CoordinateGraphqlType
 }
@@ -133,6 +144,17 @@ func Int32RangeInstanceFromArgs(objectFromArgs *Int32Range, args map[string]inte
 
 func (objectFromArgs *Int32Range) FromArgs(args map[string]interface{}) {
 	Int32RangeInstanceFromArgs(objectFromArgs, args)
+}
+
+func (x *Int32Range) Raw() interface{} {
+	return x
+}
+
+func (x *Int32Range) Validate() error {
+	if x == nil {
+		return
+	}
+	return x
 }
 
 func (msg *Int32Range) XXX_GraphqlType() *gql.Object {
@@ -212,6 +234,17 @@ func (objectFromArgs *Int32OptionalRange) FromArgs(args map[string]interface{}) 
 	Int32OptionalRangeInstanceFromArgs(objectFromArgs, args)
 }
 
+func (x *Int32OptionalRange) Raw() interface{} {
+	return x
+}
+
+func (x *Int32OptionalRange) Validate() error {
+	if x == nil {
+		return
+	}
+	return x
+}
+
 func (msg *Int32OptionalRange) XXX_GraphqlType() *gql.Object {
 	return Int32OptionalRangeGraphqlType
 }
@@ -275,6 +308,17 @@ func StringRangeInstanceFromArgs(objectFromArgs *StringRange, args map[string]in
 
 func (objectFromArgs *StringRange) FromArgs(args map[string]interface{}) {
 	StringRangeInstanceFromArgs(objectFromArgs, args)
+}
+
+func (x *StringRange) Raw() interface{} {
+	return x
+}
+
+func (x *StringRange) Validate() error {
+	if x == nil {
+		return
+	}
+	return x
 }
 
 func (msg *StringRange) XXX_GraphqlType() *gql.Object {
@@ -342,6 +386,17 @@ func (objectFromArgs *MoneyRange) FromArgs(args map[string]interface{}) {
 	MoneyRangeInstanceFromArgs(objectFromArgs, args)
 }
 
+func (x *MoneyRange) Raw() interface{} {
+	return x
+}
+
+func (x *MoneyRange) Validate() error {
+	if x == nil {
+		return
+	}
+	return x
+}
+
 func (msg *MoneyRange) XXX_GraphqlType() *gql.Object {
 	return MoneyRangeGraphqlType
 }
@@ -351,6 +406,82 @@ func (msg *MoneyRange) XXX_GraphqlArgs() gql.FieldConfigArgument {
 }
 
 func (msg *MoneyRange) XXX_Package() string {
+	return "common"
+}
+
+var DateRangeGraphqlType = gql.NewObject(gql.ObjectConfig{
+	Name: "DateRange",
+	Fields: gql.Fields{
+		"min": &gql.Field{
+			Type: DateGraphqlType,
+		},
+		"max": &gql.Field{
+			Type: DateGraphqlType,
+		},
+	},
+})
+
+var DateRangeGraphqlInputType = gql.NewInputObject(gql.InputObjectConfig{
+	Name: "DateRangeInput",
+	Fields: gql.InputObjectConfigFieldMap{
+		"min": &gql.InputObjectFieldConfig{
+			Type: DateGraphqlInputType,
+		},
+		"max": &gql.InputObjectFieldConfig{
+			Type: DateGraphqlInputType,
+		},
+	},
+})
+
+var DateRangeGraphqlArgs = gql.FieldConfigArgument{
+	"min": &gql.ArgumentConfig{
+		Type: DateGraphqlInputType,
+	},
+	"max": &gql.ArgumentConfig{
+		Type: DateGraphqlInputType,
+	},
+}
+
+func DateRangeFromArgs(args map[string]interface{}) *DateRange {
+	return DateRangeInstanceFromArgs(&DateRange{}, args)
+}
+
+func DateRangeInstanceFromArgs(objectFromArgs *DateRange, args map[string]interface{}) *DateRange {
+	if args["min"] != nil {
+		val := args["min"]
+		objectFromArgs.Min = DateFromArgs(val.(map[string]interface{}))
+	}
+	if args["max"] != nil {
+		val := args["max"]
+		objectFromArgs.Max = DateFromArgs(val.(map[string]interface{}))
+	}
+	return objectFromArgs
+}
+
+func (objectFromArgs *DateRange) FromArgs(args map[string]interface{}) {
+	DateRangeInstanceFromArgs(objectFromArgs, args)
+}
+
+func (x *DateRange) Raw() interface{} {
+	return x
+}
+
+func (x *DateRange) Validate() error {
+	if x == nil {
+		return
+	}
+	return x
+}
+
+func (msg *DateRange) XXX_GraphqlType() *gql.Object {
+	return DateRangeGraphqlType
+}
+
+func (msg *DateRange) XXX_GraphqlArgs() gql.FieldConfigArgument {
+	return DateRangeGraphqlArgs
+}
+
+func (msg *DateRange) XXX_Package() string {
 	return "common"
 }
 
@@ -418,6 +549,17 @@ func DateInstanceFromArgs(objectFromArgs *Date, args map[string]interface{}) *Da
 
 func (objectFromArgs *Date) FromArgs(args map[string]interface{}) {
 	DateInstanceFromArgs(objectFromArgs, args)
+}
+
+func (x *Date) Raw() interface{} {
+	return x
+}
+
+func (x *Date) Validate() error {
+	if x == nil {
+		return
+	}
+	return x
 }
 
 func (msg *Date) XXX_GraphqlType() *gql.Object {
@@ -509,6 +651,17 @@ func AddressInstanceFromArgs(objectFromArgs *Address, args map[string]interface{
 
 func (objectFromArgs *Address) FromArgs(args map[string]interface{}) {
 	AddressInstanceFromArgs(objectFromArgs, args)
+}
+
+func (x *Address) Raw() interface{} {
+	return x
+}
+
+func (x *Address) Validate() error {
+	if x == nil {
+		return
+	}
+	return x
 }
 
 func (msg *Address) XXX_GraphqlType() *gql.Object {
