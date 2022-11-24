@@ -74,13 +74,6 @@ func (x *Coordinate) Raw() interface{} {
 	return x
 }
 
-func (x *Coordinate) Validate() error {
-	if x == nil {
-		return
-	}
-	return x
-}
-
 func (msg *Coordinate) XXX_GraphqlType() *gql.Object {
 	return CoordinateGraphqlType
 }
@@ -147,13 +140,6 @@ func (objectFromArgs *Int32Range) FromArgs(args map[string]interface{}) {
 }
 
 func (x *Int32Range) Raw() interface{} {
-	return x
-}
-
-func (x *Int32Range) Validate() error {
-	if x == nil {
-		return
-	}
 	return x
 }
 
@@ -238,13 +224,6 @@ func (x *Int32OptionalRange) Raw() interface{} {
 	return x
 }
 
-func (x *Int32OptionalRange) Validate() error {
-	if x == nil {
-		return
-	}
-	return x
-}
-
 func (msg *Int32OptionalRange) XXX_GraphqlType() *gql.Object {
 	return Int32OptionalRangeGraphqlType
 }
@@ -311,13 +290,6 @@ func (objectFromArgs *StringRange) FromArgs(args map[string]interface{}) {
 }
 
 func (x *StringRange) Raw() interface{} {
-	return x
-}
-
-func (x *StringRange) Validate() error {
-	if x == nil {
-		return
-	}
 	return x
 }
 
@@ -390,13 +362,6 @@ func (x *MoneyRange) Raw() interface{} {
 	return x
 }
 
-func (x *MoneyRange) Validate() error {
-	if x == nil {
-		return
-	}
-	return x
-}
-
 func (msg *MoneyRange) XXX_GraphqlType() *gql.Object {
 	return MoneyRangeGraphqlType
 }
@@ -463,13 +428,6 @@ func (objectFromArgs *DateRange) FromArgs(args map[string]interface{}) {
 }
 
 func (x *DateRange) Raw() interface{} {
-	return x
-}
-
-func (x *DateRange) Validate() error {
-	if x == nil {
-		return
-	}
 	return x
 }
 
@@ -552,13 +510,6 @@ func (objectFromArgs *Date) FromArgs(args map[string]interface{}) {
 }
 
 func (x *Date) Raw() interface{} {
-	return x
-}
-
-func (x *Date) Validate() error {
-	if x == nil {
-		return
-	}
 	return x
 }
 
@@ -654,13 +605,6 @@ func (objectFromArgs *Address) FromArgs(args map[string]interface{}) {
 }
 
 func (x *Address) Raw() interface{} {
-	return x
-}
-
-func (x *Address) Validate() error {
-	if x == nil {
-		return
-	}
 	return x
 }
 
