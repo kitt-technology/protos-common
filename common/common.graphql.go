@@ -3,7 +3,6 @@ package common
 import (
 	gql "github.com/graphql-go/graphql"
 	"google.golang.org/grpc"
-	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 var fieldInits []func(...grpc.DialOption)
@@ -68,10 +67,6 @@ func CoordinateInstanceFromArgs(objectFromArgs *Coordinate, args map[string]inte
 
 func (objectFromArgs *Coordinate) FromArgs(args map[string]interface{}) {
 	CoordinateInstanceFromArgs(objectFromArgs, args)
-}
-
-func (x *Coordinate) Raw() interface{} {
-	return x
 }
 
 func (msg *Coordinate) XXX_GraphqlType() *gql.Object {
@@ -139,10 +134,6 @@ func (objectFromArgs *Int32Range) FromArgs(args map[string]interface{}) {
 	Int32RangeInstanceFromArgs(objectFromArgs, args)
 }
 
-func (x *Int32Range) Raw() interface{} {
-	return x
-}
-
 func (msg *Int32Range) XXX_GraphqlType() *gql.Object {
 	return Int32RangeGraphqlType
 }
@@ -160,21 +151,9 @@ var Int32OptionalRangeGraphqlType = gql.NewObject(gql.ObjectConfig{
 	Fields: gql.Fields{
 		"min": &gql.Field{
 			Type: gql.Int,
-			Resolve: func(p gql.ResolveParams) (interface{}, error) {
-				if p.Source.(*Int32OptionalRange) == nil || p.Source.(*Int32OptionalRange).Min == nil {
-					return nil, nil
-				}
-				return p.Source.(*Int32OptionalRange).Min.Value, nil
-			},
 		},
 		"max": &gql.Field{
 			Type: gql.Int,
-			Resolve: func(p gql.ResolveParams) (interface{}, error) {
-				if p.Source.(*Int32OptionalRange) == nil || p.Source.(*Int32OptionalRange).Max == nil {
-					return nil, nil
-				}
-				return p.Source.(*Int32OptionalRange).Max.Value, nil
-			},
 		},
 	},
 })
@@ -207,21 +186,19 @@ func Int32OptionalRangeFromArgs(args map[string]interface{}) *Int32OptionalRange
 func Int32OptionalRangeInstanceFromArgs(objectFromArgs *Int32OptionalRange, args map[string]interface{}) *Int32OptionalRange {
 	if args["min"] != nil {
 		val := args["min"]
-		objectFromArgs.Min = wrapperspb.Int32(int32(val.(int)))
+		ptr := int32(val.(int))
+		objectFromArgs.Min = &ptr
 	}
 	if args["max"] != nil {
 		val := args["max"]
-		objectFromArgs.Max = wrapperspb.Int32(int32(val.(int)))
+		ptr := int32(val.(int))
+		objectFromArgs.Max = &ptr
 	}
 	return objectFromArgs
 }
 
 func (objectFromArgs *Int32OptionalRange) FromArgs(args map[string]interface{}) {
 	Int32OptionalRangeInstanceFromArgs(objectFromArgs, args)
-}
-
-func (x *Int32OptionalRange) Raw() interface{} {
-	return x
 }
 
 func (msg *Int32OptionalRange) XXX_GraphqlType() *gql.Object {
@@ -289,10 +266,6 @@ func (objectFromArgs *StringRange) FromArgs(args map[string]interface{}) {
 	StringRangeInstanceFromArgs(objectFromArgs, args)
 }
 
-func (x *StringRange) Raw() interface{} {
-	return x
-}
-
 func (msg *StringRange) XXX_GraphqlType() *gql.Object {
 	return StringRangeGraphqlType
 }
@@ -358,10 +331,6 @@ func (objectFromArgs *MoneyRange) FromArgs(args map[string]interface{}) {
 	MoneyRangeInstanceFromArgs(objectFromArgs, args)
 }
 
-func (x *MoneyRange) Raw() interface{} {
-	return x
-}
-
 func (msg *MoneyRange) XXX_GraphqlType() *gql.Object {
 	return MoneyRangeGraphqlType
 }
@@ -425,10 +394,6 @@ func DateRangeInstanceFromArgs(objectFromArgs *DateRange, args map[string]interf
 
 func (objectFromArgs *DateRange) FromArgs(args map[string]interface{}) {
 	DateRangeInstanceFromArgs(objectFromArgs, args)
-}
-
-func (x *DateRange) Raw() interface{} {
-	return x
 }
 
 func (msg *DateRange) XXX_GraphqlType() *gql.Object {
@@ -507,10 +472,6 @@ func DateInstanceFromArgs(objectFromArgs *Date, args map[string]interface{}) *Da
 
 func (objectFromArgs *Date) FromArgs(args map[string]interface{}) {
 	DateInstanceFromArgs(objectFromArgs, args)
-}
-
-func (x *Date) Raw() interface{} {
-	return x
 }
 
 func (msg *Date) XXX_GraphqlType() *gql.Object {
@@ -602,10 +563,6 @@ func AddressInstanceFromArgs(objectFromArgs *Address, args map[string]interface{
 
 func (objectFromArgs *Address) FromArgs(args map[string]interface{}) {
 	AddressInstanceFromArgs(objectFromArgs, args)
-}
-
-func (x *Address) Raw() interface{} {
-	return x
 }
 
 func (msg *Address) XXX_GraphqlType() *gql.Object {
