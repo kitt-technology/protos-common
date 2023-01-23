@@ -2,7 +2,6 @@ syntax = "proto3";
 package common;
 
 import "github.com/kitt-technology/protoc-gen-graphql/graphql/graphql.proto";
-import "google/protobuf/wrappers.proto";
 
 option go_package = "github.com/kitt-technology/protos-common/common";
 option (graphql.package) = "github.com/kitt-technology/protos-common/common";
@@ -32,8 +31,8 @@ message Int32Range {
 }
 
 message Int32OptionalRange {
-  google.protobuf.Int32Value min = 1;
-  google.protobuf.Int32Value max = 2;
+  optional int32 min = 1;
+  optional int32 max = 2;
 }
 
 message StringRange {
