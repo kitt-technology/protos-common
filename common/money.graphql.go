@@ -58,7 +58,8 @@ var MoneyGraphqlType = gql.NewObject(gql.ObjectConfig{
 			Type:        gql.String,
 			Description: "The currency symbol associated with the currencyCode",
 			Resolve: func(p gql.ResolveParams) (interface{}, error) {
-				return currency.ParseISO(p.Source.(*Money).CurrencyCode)
+				unit, err := currency.ParseISO(p.Source.(*Money).CurrencyCode)
+				return currency.Symbol(unit), err
 			},
 		},
 		"format": &gql.Field{
