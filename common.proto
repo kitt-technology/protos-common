@@ -107,3 +107,15 @@ message DateTime {
   // Optional. IANA Time Zone Database time zone, e.g. "America/New_York".
   string time_zone = 9;
 }
+
+enum WorkflowType {
+  // postfixes are used to avoid conflicts with message names
+  ApprovalType = 0;
+  CorrespondenceType = 1;
+  OrderType = 2;
+  SiteDeliveryType = 3;
+  SourcingType = 4;
+  QuoteType = 5;
+  TaskType = 6;
+  VisitType = 7;
+}
