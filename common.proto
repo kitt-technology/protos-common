@@ -108,11 +108,13 @@ message DateTime {
   string time_zone = 9;
 }
 
-
-enum Visibility {
-  VISIBILITY_UNSET = 0;
-  // E.g. is visible to all tenants
-  VISIBILITY_PUBLIC = 1;
-  // E.g. is visible to only specific people
-  VISIBILITY_PRIVATE = 2;
+message Visibility {
+  oneof visibility {
+    // Default unset state
+    bool unset = 1;
+    // E.g. is visible to all tenants
+    bool public = 2;
+    // E.g. is visible to only specific people
+    bool private = 3;
+  }
 }
