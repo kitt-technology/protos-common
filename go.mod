@@ -1,3 +1,3 @@
 module github.com/kitt-technology/protos-common
 
-go 1.17
+go 1.24
