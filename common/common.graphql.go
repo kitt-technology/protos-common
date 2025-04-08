@@ -3,7 +3,6 @@ package common
 import (
 	gql "github.com/graphql-go/graphql"
 	"google.golang.org/grpc"
-	"github.com/graphql-go/graphql/language/ast"
 )
 
 var fieldInits []func(...grpc.DialOption)
@@ -16,34 +15,6 @@ func Fields(opts ...grpc.DialOption) []*gql.Field {
 }
 
 var fields []*gql.Field
-
-var VisibilityGraphqlEnum = gql.NewEnum(gql.EnumConfig{
-	Name: "Visibility",
-	Values: gql.EnumValueConfigMap{
-		"VISIBILITY_PRIVATE": &gql.EnumValueConfig{
-			Value: Visibility(2),
-		},
-		"VISIBILITY_PUBLIC": &gql.EnumValueConfig{
-			Value: Visibility(1),
-		},
-		"VISIBILITY_UNSET": &gql.EnumValueConfig{
-			Value: Visibility(0),
-		},
-	},
-})
-
-var VisibilityGraphqlType = gql.NewScalar(gql.ScalarConfig{
-	Name: "Visibility",
-	ParseValue: func(value interface{}) interface{} {
-		return nil
-	},
-	Serialize: func(value interface{}) interface{} {
-		return value.(Visibility).String()
-	},
-	ParseLiteral: func(valueAST ast.Value) interface{} {
-		return nil
-	},
-})
 
 var CoordinateGraphqlType = gql.NewObject(gql.ObjectConfig{
 	Name: "Coordinate",
@@ -605,3 +576,115 @@ func (msg *Address) XXX_GraphqlArgs() gql.FieldConfigArgument {
 func (msg *Address) XXX_Package() string {
 	return "common"
 }
+
+var VisibilityGraphqlType = gql.NewObject(gql.ObjectConfig{
+	Name: "Visibility",
+	Fields: gql.Fields{
+		"_null": &gql.Field{
+			Type: gql.Boolean,
+		},
+		"visibility": &gql.Field{
+			Type: visibilityGraphqlType,
+		},
+	},
+})
+
+var VisibilityGraphqlInputType = gql.NewInputObject(gql.InputObjectConfig{
+	Name: "VisibilityInput",
+	Fields: gql.InputObjectConfigFieldMap{
+		"_null": &gql.InputObjectFieldConfig{
+			Type: gql.Boolean,
+		},
+	},
+})
+
+var VisibilityGraphqlArgs = gql.FieldConfigArgument{
+	"_null": &gql.ArgumentConfig{
+		Type: gql.Boolean,
+	},
+}
+
+func VisibilityFromArgs(args map[string]interface{}) *Visibility {
+	return VisibilityInstanceFromArgs(&Visibility{}, args)
+}
+
+func VisibilityInstanceFromArgs(objectFromArgs *Visibility, args map[string]interface{}) *Visibility {
+	return objectFromArgs
+}
+
+func (objectFromArgs *Visibility) FromArgs(args map[string]interface{}) {
+	VisibilityInstanceFromArgs(objectFromArgs, args)
+}
+
+func (msg *Visibility) XXX_GraphqlType() *gql.Object {
+	return VisibilityGraphqlType
+}
+
+func (msg *Visibility) XXX_GraphqlArgs() gql.FieldConfigArgument {
+	return VisibilityGraphqlArgs
+}
+
+func (msg *Visibility) XXX_Package() string {
+	return "common"
+}
+
+var visibilityGraphqlType = gql.NewUnion(gql.UnionConfig{
+	Name:  "visibility",
+	Types: []*gql.Object{gql.NewNonNull(gql.Boolean), gql.NewNonNull(gql.Boolean), gql.NewNonNull(gql.Boolean)},
+	ResolveType: (func(p gql.ResolveTypeParams) *gql.Object {
+		switch p.Value.(type) {
+		case *Visibility_Private:
+			fields := gql.Fields{}
+			for name, field := range boolGraphqlType.Fields() {
+				fields[name] = &gql.Field{
+					Name: field.Name,
+					Type: field.Type,
+					Resolve: func(p gql.ResolveParams) (interface{}, error) {
+						wrapper := p.Source.(*Visibility_Private)
+						p.Source = wrapper.Private
+						return gql.DefaultResolveFn(p)
+					},
+				}
+			}
+			return gql.NewObject(gql.ObjectConfig{
+				Name:   boolGraphqlType.Name(),
+				Fields: fields,
+			})
+		case *Visibility_Public:
+			fields := gql.Fields{}
+			for name, field := range boolGraphqlType.Fields() {
+				fields[name] = &gql.Field{
+					Name: field.Name,
+					Type: field.Type,
+					Resolve: func(p gql.ResolveParams) (interface{}, error) {
+						wrapper := p.Source.(*Visibility_Public)
+						p.Source = wrapper.Public
+						return gql.DefaultResolveFn(p)
+					},
+				}
+			}
+			return gql.NewObject(gql.ObjectConfig{
+				Name:   boolGraphqlType.Name(),
+				Fields: fields,
+			})
+		case *Visibility_Unset:
+			fields := gql.Fields{}
+			for name, field := range boolGraphqlType.Fields() {
+				fields[name] = &gql.Field{
+					Name: field.Name,
+					Type: field.Type,
+					Resolve: func(p gql.ResolveParams) (interface{}, error) {
+						wrapper := p.Source.(*Visibility_Unset)
+						p.Source = wrapper.Unset
+						return gql.DefaultResolveFn(p)
+					},
+				}
+			}
+			return gql.NewObject(gql.ObjectConfig{
+				Name:   boolGraphqlType.Name(),
+				Fields: fields,
+			})
+		}
+		return nil
+	}),
+})

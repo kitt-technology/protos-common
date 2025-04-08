@@ -22,57 +22,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Visibility int32
-
-const (
-	Visibility_VISIBILITY_UNSET Visibility = 0
-	// E.g. is visible to all tenants
-	Visibility_VISIBILITY_PUBLIC Visibility = 1
-	// E.g. is visible to only specific people
-	Visibility_VISIBILITY_PRIVATE Visibility = 2
-)
-
-// Enum value maps for Visibility.
-var (
-	Visibility_name = map[int32]string{
-		0: "VISIBILITY_UNSET",
-		1: "VISIBILITY_PUBLIC",
-		2: "VISIBILITY_PRIVATE",
-	}
-	Visibility_value = map[string]int32{
-		"VISIBILITY_UNSET":   0,
-		"VISIBILITY_PUBLIC":  1,
-		"VISIBILITY_PRIVATE": 2,
-	}
-)
-
-func (x Visibility) Enum() *Visibility {
-	p := new(Visibility)
-	*p = x
-	return p
-}
-
-func (x Visibility) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Visibility) Descriptor() protoreflect.EnumDescriptor {
-	return file_common_proto_enumTypes[0].Descriptor()
-}
-
-func (Visibility) Type() protoreflect.EnumType {
-	return &file_common_proto_enumTypes[0]
-}
-
-func (x Visibility) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Visibility.Descriptor instead.
-func (Visibility) EnumDescriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{0}
-}
-
 type Money struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The three-letter currency code defined in ISO 4217.
@@ -701,6 +650,107 @@ func (x *DateTime) GetTimeZone() string {
 	return ""
 }
 
+type Visibility struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Visibility:
+	//
+	//	*Visibility_Unset
+	//	*Visibility_Public
+	//	*Visibility_Private
+	Visibility    isVisibility_Visibility `protobuf_oneof:"visibility"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Visibility) Reset() {
+	*x = Visibility{}
+	mi := &file_common_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Visibility) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Visibility) ProtoMessage() {}
+
+func (x *Visibility) ProtoReflect() protoreflect.Message {
+	mi := &file_common_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Visibility.ProtoReflect.Descriptor instead.
+func (*Visibility) Descriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *Visibility) GetVisibility() isVisibility_Visibility {
+	if x != nil {
+		return x.Visibility
+	}
+	return nil
+}
+
+func (x *Visibility) GetUnset() bool {
+	if x != nil {
+		if x, ok := x.Visibility.(*Visibility_Unset); ok {
+			return x.Unset
+		}
+	}
+	return false
+}
+
+func (x *Visibility) GetPublic() bool {
+	if x != nil {
+		if x, ok := x.Visibility.(*Visibility_Public); ok {
+			return x.Public
+		}
+	}
+	return false
+}
+
+func (x *Visibility) GetPrivate() bool {
+	if x != nil {
+		if x, ok := x.Visibility.(*Visibility_Private); ok {
+			return x.Private
+		}
+	}
+	return false
+}
+
+type isVisibility_Visibility interface {
+	isVisibility_Visibility()
+}
+
+type Visibility_Unset struct {
+	// Default unset state
+	Unset bool `protobuf:"varint,1,opt,name=unset,proto3,oneof"`
+}
+
+type Visibility_Public struct {
+	// E.g. is visible to all tenants
+	Public bool `protobuf:"varint,2,opt,name=public,proto3,oneof"`
+}
+
+type Visibility_Private struct {
+	// E.g. is visible to only specific people
+	Private bool `protobuf:"varint,3,opt,name=private,proto3,oneof"`
+}
+
+func (*Visibility_Unset) isVisibility_Visibility() {}
+
+func (*Visibility_Public) isVisibility_Visibility() {}
+
+func (*Visibility_Private) isVisibility_Visibility() {}
+
 var File_common_proto protoreflect.FileDescriptor
 
 const file_common_proto_rawDesc = "" +
@@ -751,12 +801,14 @@ const file_common_proto_rawDesc = "" +
 	"\aseconds\x18\x06 \x01(\x05R\aseconds\x12\x14\n" +
 	"\x05nanos\x18\a \x01(\x05R\x05nanos\x12,\n" +
 	"\x12utc_offset_seconds\x18\b \x01(\x03R\x10utcOffsetSeconds\x12\x1b\n" +
-	"\ttime_zone\x18\t \x01(\tR\btimeZone:\x03\xf8C\x01*Q\n" +
+	"\ttime_zone\x18\t \x01(\tR\btimeZone:\x03\xf8C\x01\"h\n" +
 	"\n" +
-	"Visibility\x12\x14\n" +
-	"\x10VISIBILITY_UNSET\x10\x00\x12\x15\n" +
-	"\x11VISIBILITY_PUBLIC\x10\x01\x12\x16\n" +
-	"\x12VISIBILITY_PRIVATE\x10\x02Bc\x82B/github.com/kitt-technology/protos-common/commonZ/github.com/kitt-technology/protos-common/commonb\x06proto3"
+	"Visibility\x12\x16\n" +
+	"\x05unset\x18\x01 \x01(\bH\x00R\x05unset\x12\x18\n" +
+	"\x06public\x18\x02 \x01(\bH\x00R\x06public\x12\x1a\n" +
+	"\aprivate\x18\x03 \x01(\bH\x00R\aprivateB\f\n" +
+	"\n" +
+	"visibilityBc\x82B/github.com/kitt-technology/protos-common/commonZ/github.com/kitt-technology/protos-common/commonb\x06proto3"
 
 var (
 	file_common_proto_rawDescOnce sync.Once
@@ -770,26 +822,25 @@ func file_common_proto_rawDescGZIP() []byte {
 	return file_common_proto_rawDescData
 }
 
-var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_common_proto_goTypes = []any{
-	(Visibility)(0),            // 0: common.Visibility
-	(*Money)(nil),              // 1: common.Money
-	(*Coordinate)(nil),         // 2: common.Coordinate
-	(*Int32Range)(nil),         // 3: common.Int32Range
-	(*Int32OptionalRange)(nil), // 4: common.Int32OptionalRange
-	(*StringRange)(nil),        // 5: common.StringRange
-	(*MoneyRange)(nil),         // 6: common.MoneyRange
-	(*DateRange)(nil),          // 7: common.DateRange
-	(*Date)(nil),               // 8: common.Date
-	(*Address)(nil),            // 9: common.Address
-	(*DateTime)(nil),           // 10: common.DateTime
+	(*Money)(nil),              // 0: common.Money
+	(*Coordinate)(nil),         // 1: common.Coordinate
+	(*Int32Range)(nil),         // 2: common.Int32Range
+	(*Int32OptionalRange)(nil), // 3: common.Int32OptionalRange
+	(*StringRange)(nil),        // 4: common.StringRange
+	(*MoneyRange)(nil),         // 5: common.MoneyRange
+	(*DateRange)(nil),          // 6: common.DateRange
+	(*Date)(nil),               // 7: common.Date
+	(*Address)(nil),            // 8: common.Address
+	(*DateTime)(nil),           // 9: common.DateTime
+	(*Visibility)(nil),         // 10: common.Visibility
 }
 var file_common_proto_depIdxs = []int32{
-	1, // 0: common.MoneyRange.min:type_name -> common.Money
-	1, // 1: common.MoneyRange.max:type_name -> common.Money
-	8, // 2: common.DateRange.min:type_name -> common.Date
-	8, // 3: common.DateRange.max:type_name -> common.Date
+	0, // 0: common.MoneyRange.min:type_name -> common.Money
+	0, // 1: common.MoneyRange.max:type_name -> common.Money
+	7, // 2: common.DateRange.min:type_name -> common.Date
+	7, // 3: common.DateRange.max:type_name -> common.Date
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
@@ -803,19 +854,23 @@ func file_common_proto_init() {
 		return
 	}
 	file_common_proto_msgTypes[3].OneofWrappers = []any{}
+	file_common_proto_msgTypes[10].OneofWrappers = []any{
+		(*Visibility_Unset)(nil),
+		(*Visibility_Public)(nil),
+		(*Visibility_Private)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_proto_rawDesc), len(file_common_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   10,
+			NumEnums:      0,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_common_proto_goTypes,
 		DependencyIndexes: file_common_proto_depIdxs,
-		EnumInfos:         file_common_proto_enumTypes,
 		MessageInfos:      file_common_proto_msgTypes,
 	}.Build()
 	File_common_proto = out.File
