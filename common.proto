@@ -107,3 +107,12 @@ message DateTime {
   // Optional. IANA Time Zone Database time zone, e.g. "America/New_York".
   string time_zone = 9;
 }
+
+
+enum Visibility {
+  VISIBILITY_UNSET = 0;
+  // E.g. is visible to all tenants
+  VISIBILITY_PUBLIC = 1;
+  // E.g. is visible to only specific people
+  VISIBILITY_PRIVATE = 2;
+}

@@ -3,6 +3,7 @@ package common
 import (
 	gql "github.com/graphql-go/graphql"
 	"google.golang.org/grpc"
+	"github.com/graphql-go/graphql/language/ast"
 )
 
 var fieldInits []func(...grpc.DialOption)
@@ -15,6 +16,34 @@ func Fields(opts ...grpc.DialOption) []*gql.Field {
 }
 
 var fields []*gql.Field
+
+var VisibilityGraphqlEnum = gql.NewEnum(gql.EnumConfig{
+	Name: "Visibility",
+	Values: gql.EnumValueConfigMap{
+		"VISIBILITY_PRIVATE": &gql.EnumValueConfig{
+			Value: Visibility(2),
+		},
+		"VISIBILITY_PUBLIC": &gql.EnumValueConfig{
+			Value: Visibility(1),
+		},
+		"VISIBILITY_UNSET": &gql.EnumValueConfig{
+			Value: Visibility(0),
+		},
+	},
+})
+
+var VisibilityGraphqlType = gql.NewScalar(gql.ScalarConfig{
+	Name: "Visibility",
+	ParseValue: func(value interface{}) interface{} {
+		return nil
+	},
+	Serialize: func(value interface{}) interface{} {
+		return value.(Visibility).String()
+	},
+	ParseLiteral: func(valueAST ast.Value) interface{} {
+		return nil
+	},
+})
 
 var CoordinateGraphqlType = gql.NewObject(gql.ObjectConfig{
 	Name: "Coordinate",
